@@ -64,7 +64,7 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  thumbGenerator:
+  fileUploadWacher:
     handler: handler.fileUpload
     events:
       - s3:
@@ -73,7 +73,7 @@ functions:
           rules:
             - prefix: uploads/
 
-  thumbGenerator:
+  mp4ThumbGenerator:
     handler: src/video.ThumbGenerator
     events:
       - s3:
@@ -83,7 +83,7 @@ functions:
             - prefix: uploads/
             - suffix: .mp4
             
-  thumbGenerator:
+  pngThumbGenerator:
     handler: src/images.ThumbGenerator
     events:
       - s3:
