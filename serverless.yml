@@ -73,6 +73,26 @@ functions:
           rules:
             - prefix: uploads/
 
+  thumbGenerator:
+    handler: src/video.ThumbGenerator
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .mp4
+            
+  thumbGenerator:
+    handler: src/images.ThumbGenerator
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .png
+
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
