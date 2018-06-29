@@ -13,6 +13,9 @@
 
 service: thumb-generator
 
+plugins:
+  - serverless-plugin-include-dependencies
+
 custom:
   bucket: cm-files-thumbs
 
@@ -64,7 +67,7 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  fileUploadWacher:
+  thumbGenerator:
     handler: handler.fileUpload
     events:
       - s3:
@@ -72,26 +75,6 @@ functions:
           event: s3:ObjectCreated:*
           rules:
             - prefix: uploads/
-
-  mp4ThumbGenerator:
-    handler: src/video.ThumbGenerator
-    events:
-      - s3:
-          bucket: ${self:custom.bucket}
-          event: s3:ObjectCreated:*
-          rules:
-            - prefix: uploads/
-            - suffix: .mp4
-            
-  pngThumbGenerator:
-    handler: src/images.ThumbGenerator
-    events:
-      - s3:
-          bucket: ${self:custom.bucket}
-          event: s3:ObjectCreated:*
-          rules:
-            - prefix: uploads/
-            - suffix: .png
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
