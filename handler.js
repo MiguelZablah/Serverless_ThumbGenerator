@@ -10,12 +10,12 @@ module.exports.fileUpload = (event) => {
       record.s3.object.size,
       record.s3.bucket.name
     );
-
     if(fileObj.ext === '.mp4'){
       video.fileUpload(fileObj);
-    }else{
+    }else if(fileObj.ext === '.png' || fileObj.ext === '.jpg' || fileObj.ext === '.gif'){
       image.generateThumb(fileObj);
+    }else{
+      console.log("File not extension not supporte: " + fileObj.fullName)
     }
-
   });
 };
