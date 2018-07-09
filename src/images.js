@@ -29,21 +29,21 @@ var putS3 = (file, imgBase64) => {
             return false;
         }
         console.log('success');
-        console.log(data);
+        // console.log(data);
         return true;
     });
 };
 
 var getImg64 = (file) => {
     var imgUrl = getUrl(file);
-    console.log(imgUrl);
+    // console.log(imgUrl);
     return new Promise((res, rej) => {
         Jimp.read(imgUrl, (err, image) => {
             if(err){
                 rej(err);
             }
             image.quality(60)
-            .resize(250, 250, Jimp.RESIZE_NEAREST_NEIGHBOR)
+            .resize(250, 250, Jimp.RESIZE_BEZIER)
             .getBase64("image/jpeg", (err, imgBase64) => {
                 if(err){
                     return rej("Img not convertert to base64", err);
