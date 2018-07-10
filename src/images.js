@@ -22,7 +22,7 @@ var getImg64 = (file) => {
             return rej('No thumb generated!');
         });
     });
-}
+};
 
 var generateThumb = (file) => {
     getImg64(file).then((img) => {
