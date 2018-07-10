@@ -4,7 +4,7 @@
   "description": "",
   "main": "handler.js",
   "scripts": {
-    "test": "mocha src/*.test.js"
+    "test": "mocha src/test/*.test.js"
   },
   "author": "Zablah <miguel12979@gmail.com>",
   "license": "ISC",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.271.1",
-    "jimp": "^0.2.28"
+    "jimp": "^0.2.28",
+    "mysql": "github:mysqljs/mysql"
   }
 }
