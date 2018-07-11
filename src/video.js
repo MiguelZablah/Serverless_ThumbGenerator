@@ -21,16 +21,21 @@ module.exports.thumbnailer = (file, callback) => {
     [
       function generateThumbnail(next) {
         var ffmpeg = child_process.spawn('ffmpeg', [
-          '-ss',
-          '00:00:05', // time to take screenshot
           '-i',
           target, // url to stream from
-          '-vf',
-          'thumbnail,scale=' + MAX_WIDTH + ':' + MAX_HEIGHT,
-          '-qscale:v',
-          '2',
-          '-frames:v',
+          '-r',
           '1',
+          '-an',
+          '-t',
+          '1',
+          '-ss',
+          '00:00:05', // time to take screenshot
+          '-s',
+          '250x250',
+          '-vsync',
+          '1',
+          '-threads',
+          '4',
           '-f',
           'image2',
           '-c:v',
@@ -78,7 +83,7 @@ module.exports.thumbnailer = (file, callback) => {
                 next(err);
             }
             console.log('success');
-            // console.log(data.Location);
+            console.log(data.Location);
             // Add it to MySql
             // updateThumbInDb(file, data.Location);
         });
@@ -87,8 +92,7 @@ module.exports.thumbnailer = (file, callback) => {
     function(err) {
       if (err) {
         console.error(
-          'Unable to generate thumbnail from the bucket: ' +
-            err
+          'Unable to generate thumbnail for video, error code: ' + err
         );
       } else {
         console.log(
