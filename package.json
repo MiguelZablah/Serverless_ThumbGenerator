@@ -16,7 +16,6 @@
   "dependencies": {
     "async": "^2.6.1",
     "aws-sdk": "^2.271.1",
-    "jimp": "^0.2.28",
-    "mysql": "github:mysqljs/mysql"
+    "jimp": "^0.2.28"
   }
 }
