@@ -1,6 +1,5 @@
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
-const {updateThumbInDb} = require("./database");
 
 // Creates a pre-sign url for img
 var getUrl = (file, timeToExpire = 300) => {
@@ -28,8 +27,6 @@ var putS3 = (file, imgBase64) => {
         }
         console.log('success');
         console.log(data.Location);
-        // Add it to MySql
-        // updateThumbInDb(file, data.Location);
         return true;
     });
 };

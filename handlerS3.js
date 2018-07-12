@@ -5,6 +5,7 @@ process.env['PATH'] = process.env['PATH'] + ':' + BIN_PATH;
 'use strict';
 //Set up ffmpeg binary path at LAMBDA_TASK_ROOT
 const video = require('./src/video');
+const audio = require('./src/audio');
 const image = require('./src/images');
 const {generateFileObj} = require('./src/utils');
 
@@ -20,11 +21,13 @@ module.exports.fileUpload = (event, context, callback) => {
         if (error) {
           console.log('Erro occured',error);
         } else {
-            video.thumbnailer(fileObj, callback);
+            video.thumbMaker(fileObj, callback);
         }
       });
     }else if(fileObj.ext === '.png' || fileObj.ext === '.jpg' || fileObj.ext === '.gif'){
-      image.generateThumb(fileObj);
+      image.thumbMaker(fileObj);
+    }else if(fileObj.ext === '.mp3'){
+      audio.thumbMaker(fileObj);
     }else{
       console.log("File not extension not supporte: " + fileObj.fullName)
     }

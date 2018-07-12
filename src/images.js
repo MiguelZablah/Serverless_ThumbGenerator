@@ -11,6 +11,7 @@ var getImg64 = (file) => {
                 rej(err);
             }
             image.quality(60)
+            // .contain(250, 250)
             .resize(250, 250, Jimp.RESIZE_BEZIER)
             .getBase64("image/jpeg", (err, imgBase64) => {
                 if(err){
@@ -24,7 +25,7 @@ var getImg64 = (file) => {
     });
 };
 
-var generateThumb = (file) => {
+var thumbMaker = (file) => {
     getImg64(file).then((img) => {
         if(putS3(file, img)){
             return true;
@@ -37,5 +38,5 @@ var generateThumb = (file) => {
 };
 
 module.exports = {
-    generateThumb
+    thumbMaker
 };

@@ -6,12 +6,8 @@ var child_process = require('child_process');
 var async = require('async');
 const {getUrl} = require('./awsS3');
 const fs = require('fs');
-const {updateThumbInDb} = require("./database");
-//Set up Height and Width of the Thumbnail
-let MAX_HEIGHT = 250;
-let MAX_WIDTH = 250;
 
-module.exports.thumbnailer = (file, callback) => {
+module.exports.thumbMaker = (file, callback) => {
   //Temporary file write stream
   var tmpFile = fs.createWriteStream('/tmp/screenshot.jpg');
   //Temporary file key
@@ -84,8 +80,6 @@ module.exports.thumbnailer = (file, callback) => {
             }
             console.log('success');
             console.log(data.Location);
-            // Add it to MySql
-            // updateThumbInDb(file, data.Location);
         });
       }
     ],

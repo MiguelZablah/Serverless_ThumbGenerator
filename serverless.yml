@@ -68,13 +68,21 @@ provider:
 
 functions:
   thumbGenerator:
-    handler: handler.fileUpload
+    handler: handlerS3.fileUpload
     events:
       - s3:
           bucket: ${self:custom.bucket}
           event: s3:ObjectCreated:*
           rules:
             - prefix: uploads/
+  saveToRds:
+    handler: handlerRds.saveToMySql
+    events:
+      - s3:
+          bucket: ${self:custom.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: thumbs/
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
