@@ -4,7 +4,7 @@ plugins:
   - serverless-plugin-include-dependencies
 
 custom:
-  BUCKET_NAME: cm-files-uploads
+  BUCKET_NAME: cm-files-thumbs-prod
 
 provider:
   name: aws
@@ -39,10 +39,3 @@ functions:
           event: s3:ObjectCreated:*
           rules:
             - prefix: uploads/
-
-resources:
- Resources:
-   NewResource:
-     Type: AWS::S3::Bucket
-     Properties:
-       BucketName: ${self:custom.BUCKET_NAME}
